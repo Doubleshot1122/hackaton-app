@@ -1,13 +1,21 @@
-
-exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
-};
+exports.seed = (knex) => {
+  return knex('articles').truncate()
+    .then(() => {
+      return knex('articles').insert([
+        {
+          title: 'There are lots of ways to get to impeachment',
+          png: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/170518051436-donald-trump-silhouette-0516-medium-plus-169.jpg',
+          link: "http://www.cnn.com/2017/05/20/opinions/there-are-lots-of-ways-to-get-to-impeachment-cevallos/index.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+rss%2Fcnn_topstories+%28RSS%3A+CNN+-+Top+Stories%29",
+          keywords: {keywords: ['gang', 'construction', 'human traffic']},
+          description: "CNN - President Donald Trump"
+        },
+        {
+          title: "Comey's father: Trump was 'scared to death' of FBI director",
+          png: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/170518051436-donald-trump-silhouette-0516-medium-plus-169.jpg',
+          link: "http://www.cnn.com/2017/05/20/politics/comey-father-trump/index.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+rss%2Fcnn_allpolitics+%28RSS%3A+CNN+-+Politics%29",
+          keywords: {keywords: ['impeachment', 'CNN', 'human traffic']},
+          description: "CNN - As White House"
+        }
+      ])
+    })
+}
