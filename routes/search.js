@@ -5,14 +5,14 @@ var search = require('../controllers/searchController');
 var urls = ['http://rss.cnn.com/rss/cnn_topstories.rss'];
 
 /* search keywords */
-router.get('/:keyword', function(req, res, next) {
+router.get('/', function(req, res, next) {
     var keyword = req.params.keyword;
 
     urls.forEach(function(url) {
         search.parseRSSfeed(url);
     });
 
-    res.send('input keyword: ' + keyword);
+    res.send('populating database');
 
 });
 module.exports = router;

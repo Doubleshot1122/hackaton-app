@@ -1,5 +1,6 @@
 var Feed = require('rss-to-json');
 var MetaInspector = require('node-metainspector');
+var db = require('../db');
 
 var rssItems = [];
 
@@ -10,7 +11,7 @@ function parseRSSitem(value) {
     r["title"] = value.title;
     r["description"] = value.description;
     r["keywords"] = [];
-    r["image"] = null;
+    r["png"] = null;
 
     client.on("fetch", function(){
         keys = client.keywords;
@@ -27,9 +28,13 @@ function parseRSSitem(value) {
             }
         }
 
-        r["image"] = client.image;
-        console.log(r);
-        rssItems.push(r);
+        r["png"] = client.image;
+        r["link"] = url;
+        if(r["keywords"].length > 1) {
+            r["keywords"] = JSON.stringify(r["keywords"]);
+            console.log(r);
+            return db('articles').insert(r).catch((err) => console.log(err));
+        }
     });
 
     client.fetch();
