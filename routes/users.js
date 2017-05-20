@@ -5,17 +5,17 @@ const userController = require('../controllers/userController')
 
 
 //user profile
-router.get('/user/:id', userController.showUserProfile)
-router.put('/user/:id', userController.customizeUser)
+router.get('/:id', userController.showUserProfile)
+router.put('/:id', userController.customizeUser)
 
 //add user
-router.post('/user', userController.newUser)
+router.post('/', userController.newUser)
 
 //user index page
-router.get('/user/:id/article', userController.showAllArticles)
+router.get('/:id/article', userController.showAllArticles)
 
 //specific article ppage
-router.get('/user/:id/article/:articleId', userController.showSpecificArticle)
+router.get('/:id/article/:articleId', userController.showSpecificArticle)
 
 
 
