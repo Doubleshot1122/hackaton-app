@@ -22,6 +22,10 @@ function customizeUser(req, res, next){
     .catch((err) => next(err))
 }
 
+function getUserForm(req, res, next){
+  return res.render('/add-user');
+}
+
 function newUser(req,res,next){
   const newUser = req.body
 
@@ -51,5 +55,6 @@ module.exports = {
   customizeUser,
   newUser,
   showAllArticles,
-  showSpecificArticle
+  showSpecificArticle,
+  getUserForm
 }

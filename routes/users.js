@@ -9,6 +9,7 @@ router.get('/:id', userController.showUserProfile)
 router.put('/:id', userController.customizeUser)
 
 //add user
+router.get('/add-user', userController.getUserForm)
 router.post('/', userController.newUser)
 
 //user index page
