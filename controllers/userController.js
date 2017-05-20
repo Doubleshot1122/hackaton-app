@@ -40,11 +40,67 @@ function newUser(req,res,next){
 }
 
 //show all articles
+  //restrict articles passed to the rendering function just to the ones that are relevant to that keyword
 function showAllArticles(req, res, next){
   const id = req.params.id
-  const articleData = '' //fill in later
-  res.render('/articles/index', articleData)
+
+  return Promise.all([queryUsers(id),queryArticles()])
+    .then((userArticleData) => {
+      const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords).sort(sortArticles)
+      res.render('/article/index', {articles})
+    })
+    .catch((err) => next(err))
 }
+
+function queryUsers(id){
+  return db('users').where('users.id',id)
+}
+
+function queryArticles(){
+  return db('articles')
+}
+
+// returns articles that have matching keywords with additional fields for number of matches, and
+function returnRelevantArticles(articleData, keywords){
+  return articleData.filter(article => {
+    if(checkForKeywords(article,keywords)){
+      return countMatches(article,keywords)
+    }
+  })
+}
+
+// returns a boolean and decides whether or not an article is relevant to the user
+function checkForKeywords(article, userKeys){
+  return article.keywords.keywords.some(keyword => userKeys.includes(keyword))
+}
+
+//could also add a field matched keys to enable fancy display of matches
+function countMatches(article, userKeys){
+  const matches = []
+
+  const numberOfMatches = article.keywords.keywords.filter(keyword =>{
+    if(userKeys.includes(keyword)){
+      matches.push(keyword)
+      return keyword
+    }
+  }).length
+
+  article.numMatches = numberOfMatches
+  article.matchedWords = matches
+
+  return article
+}
+
+function sortArticles(a,b){
+  if(a.numMatches < b.numMatches){
+    return 1
+  }
+  else if(a.numMatches > b.numMatches){
+    return -1
+  }
+  return 0
+}
+
 
 function showSpecificArticle(req, res, next){
   const userId = req.params.id
