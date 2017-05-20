@@ -47,8 +47,8 @@ function showAllArticles(req, res, next){
 
   return Promise.all([queryUsers(id),queryArticles()])
     .then((userArticleData) => {
-      const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords)
-      console.log('filtered articles!',articles)
+      const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords).sort(sortArticles)
+      console.log('filtered articles, and sorted them!',articles)
       res.render('/article/index', {articles})
     })
     .catch((err) => next(err))
@@ -62,28 +62,46 @@ function queryArticles(){
   return db('articles')
 }
 
-//sorts the article feed
-  //uses keywords to identify relevant articles
-
-  //weight articles by the number of matched keywords
+// returns articles that have matching keywords with additional fields for number of matches, and
 function returnRelevantArticles(articleData, keywords){
   return articleData.filter(article => {
-    if(article.keywords.keywords.some(keyword => keywords.includes(keyword))){
-      return article
+    if(checkForKeywords(article,keywords)){
+      return countMatches(article,keywords)
     }
   })
 }
 
 // returns a boolean and decides whether or not an article is relevant to the user
-function checkForKeywords(keyword){}
+  //appends a new field to the object -> matches
+    //matches determines the number of matches between each keyword set
+function checkForKeywords(article, userKeys){
+  return article.keywords.keywords.some(keyword => userKeys.includes(keyword))
+}
 
+//need to write a function that appends number of matches between keywords
+  //could also add a field matched keys to enable fancy display of matches
+function countMatches(article, userKeys){
+  const matches = []
+
+  const numberOfMatches = article.keywords.keywords.filter(keyword =>{
+    if(userKeys.includes(keyword)){
+      matches.push(keyword)
+      return keyword
+    }
+  }).length
+
+  article.numMatches = numberOfMatches
+  article.matchedWords = matches
+
+  return article
+}
 
 function sortArticles(a,b){
-  if(a.matches < b.matches){
-    return -1
-  }
-  else if(a.matches > b.matches){
+  if(a.numMatches < b.numMatches){
     return 1
+  }
+  else if(a.numMatches > b.numMatches){
+    return -1
   }
   return 0
 }
