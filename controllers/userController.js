@@ -40,11 +40,54 @@ function newUser(req,res,next){
 }
 
 //show all articles
+  //restrict articles passed to the rendering function just to the ones that are relevant to that keyword
+  //call a sorting function
 function showAllArticles(req, res, next){
   const id = req.params.id
-  const articleData = '' //fill in later
-  res.render('/articles/index', articleData)
+
+  return Promise.all([queryUsers(id),queryArticles()])
+    .then((userArticleData) => {
+      const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords)
+      console.log('filtered articles!',articles)
+      res.render('/article/index', {articles})
+    })
+    .catch((err) => next(err))
 }
+
+function queryUsers(id){
+  return db('users').where('users.id',id)
+}
+
+function queryArticles(){
+  return db('articles')
+}
+
+//sorts the article feed
+  //uses keywords to identify relevant articles
+
+  //weight articles by the number of matched keywords
+function returnRelevantArticles(articleData, keywords){
+  return articleData.filter(article => {
+    if(article.keywords.keywords.some(keyword => keywords.includes(keyword))){
+      return article
+    }
+  })
+}
+
+// returns a boolean and decides whether or not an article is relevant to the user
+function checkForKeywords(keyword){}
+
+
+function sortArticles(a,b){
+  if(a.matches < b.matches){
+    return -1
+  }
+  else if(a.matches > b.matches){
+    return 1
+  }
+  return 0
+}
+
 
 function showSpecificArticle(req, res, next){
   const userId = req.params.id
