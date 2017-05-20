@@ -32,8 +32,14 @@ function parseRSSitem(value) {
         r["link"] = url;
         if(r["keywords"].length > 1) {
             r["keywords"] = JSON.stringify(r["keywords"]);
-            console.log(r);
-            return db('articles').insert(r).catch((err) => console.log(err));
+            //console.log(r);
+            return db('articles').select('id').where('link',url)
+                .then((response) => {
+                    if(response.length === 0){
+                        return db('articles').insert(r);
+                    }
+                }
+            );
         }
     });
 
@@ -48,7 +54,6 @@ function parseRSSfeed(url) {
             parseRSSitem(item);
         }
     });
-    console.log(rssItems);
 }
 
 module.exports = {
