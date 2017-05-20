@@ -1,6 +1,6 @@
 const path = require('path')
+const dotenv = require('dotenv').config()
 const connectionPATH = process.env.CONNECTION_PATH || ''
-
 
 module.exports = {
   development: {
