@@ -41,14 +41,12 @@ function newUser(req,res,next){
 
 //show all articles
   //restrict articles passed to the rendering function just to the ones that are relevant to that keyword
-  //call a sorting function
 function showAllArticles(req, res, next){
   const id = req.params.id
 
   return Promise.all([queryUsers(id),queryArticles()])
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords).sort(sortArticles)
-      console.log('filtered articles, and sorted them!',articles)
       res.render('/article/index', {articles})
     })
     .catch((err) => next(err))
@@ -72,14 +70,11 @@ function returnRelevantArticles(articleData, keywords){
 }
 
 // returns a boolean and decides whether or not an article is relevant to the user
-  //appends a new field to the object -> matches
-    //matches determines the number of matches between each keyword set
 function checkForKeywords(article, userKeys){
   return article.keywords.keywords.some(keyword => userKeys.includes(keyword))
 }
 
-//need to write a function that appends number of matches between keywords
-  //could also add a field matched keys to enable fancy display of matches
+//could also add a field matched keys to enable fancy display of matches
 function countMatches(article, userKeys){
   const matches = []
 
