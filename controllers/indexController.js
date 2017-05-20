@@ -1,8 +1,10 @@
+const db = require('../db');
+
 //index dropdown
 function getAllUsersDropDown(req, res, next){
-  const id = req.params.id
-  const articleData = '' //fill in later
-  res.render('/articles/index', articleData)
+  
+
+  res.render('/', users)
 }
 
 module.exports = {
