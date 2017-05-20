@@ -7,7 +7,7 @@ function customizeUser(req, res, next){
 }
 
 function newUser(req,res,next){
-  
+
 }
 
 //show all articles
@@ -26,6 +26,7 @@ function showSpecificArticle(req, res, next){
 module.exports = {
   showUserProfile,
   customizeUser,
+  newUser
   showAllArticles,
   showSpecificArticle
 }

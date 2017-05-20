@@ -1,9 +1,11 @@
 const path = require('path')
+const connectionPATH = process.env.CONNECTION_PATH || ''
+
 
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/hacknet_db',
+    connection: `postgres://${connectionPATH}localhost/hacknet_db`,
     migrations: {
       directory: path.join(__dirname, 'db', 'migrations')
     },
