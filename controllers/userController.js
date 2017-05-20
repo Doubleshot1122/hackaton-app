@@ -26,7 +26,7 @@ function showSpecificArticle(req, res, next){
 module.exports = {
   showUserProfile,
   customizeUser,
-  newUser
+  newUser,
   showAllArticles,
   showSpecificArticle
 }
