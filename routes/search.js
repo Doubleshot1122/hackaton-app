@@ -1,5 +1,4 @@
 var express = require('express');
-
 var router = express.Router();
 var search = require('../controllers/searchController');
 
@@ -16,7 +15,4 @@ router.get('/:keyword', function(req, res, next) {
     res.send('input keyword: ' + keyword);
 
 });
-
-
-
 module.exports = router;
