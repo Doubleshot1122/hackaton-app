@@ -8,7 +8,7 @@
         <div class="row ">
           <form class="col s12">
             <div class="input-field col s6">
-              <input id="profile_name" type="text" class="validate">
+              <input id="profile_name" type="text" class="validate" name="name">
               <label for="profile_name">Profile Name</label>
             </div>
             <div class="file-field input-field col s4">
@@ -17,19 +17,19 @@
                 <input type="file">
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
+                <input class="file-path validate" type="text" name="image_url">
               </div>
             </div>
             <div class="input-field col s6">
-              <input id="region" type="text" class="validate">
+              <input id="region" type="text" class="validate" name="region">
               <label for="region">Region</label>
             </div>
             <div class="input-field col s12">
-              <input id="keywords" type="text" class="validate">
+              <input id="keywords" type="text" class="validate" name="keywords">
               <label for="keywords">Keywords</label>
             </div>
             <div class="col s3 offset-s4 center">
-              <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit</button>
+              <button id="profile-form-submit" class="btn waves-effect waves-light blue" type="submit" name="action">Submit</button>
             </div>
           </form>
         </div>
