@@ -1,24 +1,9 @@
-const express = require('express')
-const router = express.Router()
+var express = require('express');
+var router = express.Router();
 
-const userController = require('../controllers/userController')
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
 
-
-//user profile
-router.get('/:id', userController.showUserProfile)
-router.put('/:id', userController.customizeUser)
-
-//add user
-router.post('/', userController.newUser)
-
-//user index page
-router.get('/:id/article', userController.showAllArticles)
-
-//specific article ppage
-router.get('/:id/article/:articleId', userController.showSpecificArticle)
-
-
-
-
-
-module.exports = router
+module.exports = router;
