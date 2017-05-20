@@ -4,13 +4,14 @@ const router = express.Router()
 const userController = require('../controllers/userController')
 
 
+//add user
+router.get('/add-user', userController.getUserForm)
+router.post('/', userController.newUser)
+
 //user profile
 router.get('/:id', userController.showUserProfile)
 router.put('/:id', userController.customizeUser)
 
-//add user
-router.get('/add-user', userController.getUserForm)
-router.post('/', userController.newUser)
 
 //user index page
 router.get('/:id/article', userController.showAllArticles)

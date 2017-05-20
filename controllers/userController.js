@@ -1,3 +1,5 @@
+const db = require('../db')
+
 function showUserProfile(req, res, next){
   const id = req.params.id
 
@@ -23,7 +25,7 @@ function customizeUser(req, res, next){
 }
 
 function getUserForm(req, res, next){
-  return res.render('/add-user');
+  return res.render('profile-form');
 }
 
 function newUser(req,res,next){
