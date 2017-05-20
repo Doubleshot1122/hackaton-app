@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const indexController = require('../controllers/articleController.js')
+const articleController = require('../controllers/articleController.js')
 
 /* GET home page. */
 router.get('/:id', articleController.getSingleArticle)

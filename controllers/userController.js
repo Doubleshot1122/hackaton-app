@@ -47,6 +47,7 @@ function showAllArticles(req, res, next){
   return Promise.all([queryUsers(id),queryArticles()])
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords).sort(sortArticles)
+      console.log(articles);
       res.render('/article/index', {articles})
     })
     .catch((err) => next(err))
