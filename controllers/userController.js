@@ -42,15 +42,16 @@ function customizeUser(req, res, next) {
 
 function getUserForm(req, res, next) {
   const id = req.params.id
-  return db('users')
-    .where('users.id', id)
-    .then((users) => {
-      user = users[0];
-      user.keywords = user.keywords.keywords.join(" ");
-      res.render('profile-edit.hbs', {
-        user
-      })
-    }).catch((err) => next(err));
+  if (id) {
+    return db('users')
+      .where('users.id', id)
+      .then((users) => {
+        user = users[0];
+        user.keywords = user.keywords.keywords.join(" ");
+        res.render('profile-edit.hbs', { user })
+      }).catch((err) => next(err));
+  }
+  res.render('profile-form')
 }
 
 function newUser(req, res, next) {

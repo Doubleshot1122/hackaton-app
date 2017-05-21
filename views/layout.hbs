@@ -11,6 +11,8 @@
       <div class="nav-wrapper">
         {{#if users}}
         <a href="/users/{{users.id}}" class="brand-logo right">{{users.name}}</a>
+        {{else}}
+        <a href="/" class="brand-logo right">HOME</a>
         {{/if}}
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">Menu</i></a>
         <ul class="left hide-on-med-and-down">

@@ -1,2 +1,11 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="container">
+  <ul class="collection">
+    {{#each users}}
+    <li class="collection-item avatar">
+      <img src="assets/{{this.image_url}}" alt="" class="circle">
+      <span class="title">{{this.name}}</span>
+      <a href="/users/{{this.id}}" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    {{/each}}
+  </ul>
+</div>
