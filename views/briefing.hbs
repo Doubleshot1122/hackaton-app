@@ -1,0 +1,28 @@
+{{#each briefing}}
+    <div class="row">
+      <div class="col s12 m6 l3">
+        <div class="card large blue-grey">
+          <div class="card-content white-text">
+            <img src="{{this.png}}" class="article-image"></img>
+            <br>
+            <span class="card-title activator">{{ this.title }}</span>
+            <p class="activator">{{ this.preview }}</p>
+            <br>
+            <ul id="navlist" class="center tags-chips">
+              {{#each this.matchedWords}}
+                <span class="chip"><i class="material-icons">{{this}}</i></span>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title">{{ this.title }}<i class="material-icons right">close</i></span>
+            <p>{{ this.description }}</p>
+            <a href="{{ this.link }}">Read More</a>
+          </div>
+          <div class="center">
+            <a href="/users/{{id}}/articles/{{this.id}}" class="waves-effect waves-light btn"><i class="material-icons left"></i>read</a>
+            <a class="waves-effect waves-light btn"><i class="material-icons right"></i>Add</a>
+          </div>
+        </div>
+    </div>
+{{/each}}
