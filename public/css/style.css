@@ -14,3 +14,15 @@
   box-shadow: 0 1px 0 0 #1874c9;
   color: black;
 }
+
+#navlist li {
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
+
+.capsule {
+  border-radius: 30%;
+  background-color: blue;
+  center;
+}
