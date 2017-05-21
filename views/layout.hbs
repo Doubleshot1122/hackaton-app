@@ -10,8 +10,8 @@
   <body>
     <nav class="blue darken-4">
       <div class="nav-wrapper">
-        {{#if users}}
-        <a href="/users/{{users.id}}" class="brand-logo right">{{users.name}}</a>
+        {{#if user}}
+        <a href="/users/{{user.id}}" class="brand-logo right">{{user.name}}</a>
         {{else}}
         <a href="/" class="brand-logo right">HOME</a>
         {{/if}}

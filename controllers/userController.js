@@ -25,8 +25,9 @@ function editUserProfile(req, res, next) {
 
   return db('users')
     .where('users.id', id)
-    .then((userData) => {
-      res.render('/user/index', userData)
+    .then((users) => {
+      console.log(users);
+      res.render('profile-edit', {users})
     })
     .catch((err) => next(err))
 }
