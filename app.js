@@ -29,12 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-<<<<<<< HEAD
 app.use('/rss', search);
-=======
-app.use('/search', search);
 app.use('/articles', articles);
->>>>>>> 3f6ff214c1c16bf5762df058a974101d39d44f89
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
