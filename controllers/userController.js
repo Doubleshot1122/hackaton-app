@@ -6,7 +6,7 @@ function showUserProfile(req, res, next) {
   return db('users')
     .where('users.id', id)
     .then((userData) => {
-      res.render('/user/index', userData)
+      res.render('users', userData)
     })
     .catch((err) => next(err))
 }
