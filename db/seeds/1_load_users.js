@@ -6,7 +6,7 @@ exports.seed = (knex) => {
           name: 'ICE Director',
           image_url: 'assets/ice-director.png',
           region: "domestic",
-          keywords: {keywords: ['gang', 'construction', 'human traffic']}
+          keywords: {keywords: ['gang', 'construction', 'human traffic', 'trump']}
         },
         {
           name: 'ASD-NCB',
