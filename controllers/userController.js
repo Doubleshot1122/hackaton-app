@@ -1,4 +1,6 @@
-const db = require('../db')
+const db = require('../db');
+const striptags = require('striptags');
+
 
 function showUserProfile(req, res, next) {
   const id = req.params.id
@@ -8,7 +10,12 @@ function showUserProfile(req, res, next) {
     .then((userData) => {
       const users = userData[0]
       users.keywords = users.keywords.keywords
-      res.render('users', {users})
+      return users;
+    })
+    .then((users) => {
+      return db('users').then((allUsers) => {
+        res.render('users', { users, allUsers })
+      })
     })
     .catch((err) => next(err))
 }
@@ -41,15 +48,16 @@ function customizeUser(req, res, next) {
 
 function getUserForm(req, res, next) {
   const id = req.params.id
-  return db('users')
-    .where('users.id', id)
-    .then((users) => {
-      user = users[0];
-      user.keywords = user.keywords.keywords.join(" ");
-      res.render('profile-edit.hbs', {
-        user
-      })
-    }).catch((err) => next(err));
+  if (id) {
+    return db('users')
+      .where('users.id', id)
+      .then((users) => {
+        user = users[0];
+        user.keywords = user.keywords.keywords.join(" ");
+        res.render('profile-edit.hbs', { user })
+      }).catch((err) => next(err));
+  }
+  res.render('profile-form')
 }
 
 function newUser(req, res, next) {
@@ -74,7 +82,7 @@ function showAllArticles(req, res, next) {
   return Promise.all([queryUsers(id), queryArticles()])
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1], userArticleData[0][0].keywords.keywords).sort(sortArticles)
-      console.log(articles);
+      console.log(articles)
       res.render('showUserArticles.hbs', {articles: articles, id: id})
     })
     .catch((err) => next(err))
@@ -115,6 +123,7 @@ function countMatches(article, userKeys) {
 
   article.numMatches = numberOfMatches
   article.matchedWords = matches
+  article.description = striptags(article.description)
 
   return article
 }
@@ -128,18 +137,10 @@ function sortArticles(a, b) {
   return 0
 }
 
-
-function showSpecificArticle(req, res, next) {
-  const userId = req.params.id
-  const articleId = req.params.articleId
-}
-
-
 module.exports = {
   showUserProfile,
   customizeUser,
   newUser,
   showAllArticles,
-  showSpecificArticle,
   getUserForm
 }
