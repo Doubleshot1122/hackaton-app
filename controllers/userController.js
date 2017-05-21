@@ -140,10 +140,22 @@ function sortArticles(a, b) {
   return 0
 }
 
+//show list of briefing added to user
 function showUserBreifing(req, res, next) {
-  res.render('briefing')
+  const userid = req.params.id;
+
+  db('articles')
+  .innerJoin('user_article', 'articles.id', 'user_article.article_id')
+  .where('user_article.user_id', `${userid}`)
+  .then(breifingArticles => {
+    console.log(breifingArticles.length);
+    res.render('briefing', { breifingArticles })
+  })
+
+
 }
 
+//add new briefing to the list of user briefings
 function addUserBreifing(req, res, next) {
   const user_id = req.body.user_id;
   const article_id = req.body.article_id;
