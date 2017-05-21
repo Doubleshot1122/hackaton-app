@@ -6,7 +6,9 @@ function showUserProfile(req, res, next) {
   return db('users')
     .where('users.id', id)
     .then((userData) => {
-      res.render('/user/index', userData)
+      const users = userData[0]
+      users.keywords = users.keywords.keywords
+      res.render('users', {users})
     })
     .catch((err) => next(err))
 }
