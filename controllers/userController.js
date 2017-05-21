@@ -1,4 +1,5 @@
-const db = require('../db')
+const db = require('../db');
+const striptags = require('striptags');
 
 function showUserProfile(req, res, next) {
   const id = req.params.id
@@ -74,6 +75,9 @@ function showAllArticles(req, res, next) {
   return Promise.all([queryUsers(id), queryArticles()])
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1], userArticleData[0][0].keywords.keywords).sort(sortArticles)
+      console.log("===========");
+      console.log(articles);
+      console.log("===========");
       res.render('showUserArticles.hbs', {articles: articles, id: id})
     })
     .catch((err) => next(err))
@@ -136,7 +140,11 @@ function showSpecificArticle(req, res, next){
 
   return Promise.all([article, user])
     .then(results => {
-      console.log(results[0].description);
+      console.log('=========');
+      console.log(results[0]);
+      console.log('---------');
+      console.log(striptags(results[0].description));
+      console.log('=========');
       res.render(`singleArticle`, {article: results[0], user: results[1]})
     })
     .catch((err) => next(err))
