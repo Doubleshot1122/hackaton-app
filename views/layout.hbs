@@ -31,6 +31,9 @@
           {{#if users}}
           <li><a href="/users/{{users.id}}/edit">Edit Profile</a></li>
           {{/if}}
+          {{#if userId}}
+          <li><a href="/users/{{userId}}/edit">Edit Profile</a></li>
+          {{/if}}
           <li><a href="#">View Brief</a></li>
           <li><a href="#">Print Brief</a></li>
           {{#if allUsers}}
