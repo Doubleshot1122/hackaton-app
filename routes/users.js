@@ -16,11 +16,5 @@ router.put('/:id', userController.customizeUser)
 //user index page
 router.get('/:id/article', userController.showAllArticles)
 
-//specific article ppage
-router.get('/:id/article/:articleId', userController.showSpecificArticle)
-
-
-
-
 
 module.exports = router
