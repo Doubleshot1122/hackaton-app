@@ -165,6 +165,7 @@ function addUserBreifing(req, res, next) {
   .then(results => {
     res.send(results)
   })
+  return db('user_article')
 }
 
 module.exports = {
