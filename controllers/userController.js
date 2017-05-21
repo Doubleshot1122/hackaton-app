@@ -33,7 +33,7 @@ function newUser(req,res,next){
   newUser.keywords = {
     'keywords' : newUser.keywords.split(' ')
   };
-  console.log(newUser);
+  
   return db('users')
     .insert(newUser, '*')
     .then((newUser) => {
