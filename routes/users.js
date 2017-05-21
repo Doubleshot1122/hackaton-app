@@ -16,5 +16,8 @@ router.put('/:id', userController.customizeUser)
 //user index page
 router.get('/:id/article', userController.showAllArticles)
 
+//briefing page
+router.get('/:id/briefing', userController.showUserBreifing)
+router.post('/:id/briefing/new', userController.addUserBreifing)
 
 module.exports = router

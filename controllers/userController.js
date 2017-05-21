@@ -137,10 +137,20 @@ function sortArticles(a, b) {
   return 0
 }
 
+function showUserBreifing(req, res, next) {
+
+}
+
+function addUserBreifing(req, res, next) {
+
+}
+
 module.exports = {
   showUserProfile,
   customizeUser,
   newUser,
   showAllArticles,
-  getUserForm
+  getUserForm,
+  showUserBreifing,
+  addUserBreifing
 }
