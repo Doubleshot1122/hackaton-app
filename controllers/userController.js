@@ -150,7 +150,6 @@ function showUserBreifing(req, res, next) {
     .innerJoin('user_article', 'articles.id', 'user_article.article_id')
     .where('user_article.user_id', `${userid}`)
     .then(briefing => {
-      console.log(briefing)
       res.render('briefing', { briefing })
     })
     .catch((err) => next(err))
