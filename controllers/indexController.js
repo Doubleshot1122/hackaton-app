@@ -4,7 +4,7 @@ const db = require('../db');
 function getAllUsersDropDown(req, res, next){
   return db('users').select('id', 'name', 'image_url')
   .then(users => {
-    res.render('index', users)
+    res.render('index', { users })
   })
   .catch((err) => next(err))
 }
