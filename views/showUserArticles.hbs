@@ -3,10 +3,11 @@
       <div class="col s12 m6 l3">
         <div class="card large blue-grey">
           <div class="card-content white-text">
+            <img src="{{this.png}}" class="article-image"></img>
+            <br>
             <span class="card-title activator">{{ this.title }}</span>
             <p class="activator">{{ this.preview }}</p>
             <br>
-            <img src="{{this.png}}"></img>
             <ul id="navlist">
               <!-- transform into "pull button" format, maybe with a % determined border-radius-->
               {{#each this.matchedWords}}

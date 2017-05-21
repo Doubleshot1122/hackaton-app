@@ -26,3 +26,8 @@ padding-right: 20px;
   background-color: blue;
   center;
 }
+
+.article-image {
+  width: 350px;
+  height: auto;
+}
