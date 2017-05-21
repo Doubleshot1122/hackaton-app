@@ -30,7 +30,10 @@ function getUserForm(req, res, next){
 
 function newUser(req,res,next){
   const newUser = req.body
-
+  newUser.keywords = {
+    'keywords' : newUser.keywords.split(' ')
+  };
+  console.log(newUser);
   return db('users')
     .insert(newUser, '*')
     .then((newUser) => {
