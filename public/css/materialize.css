@@ -4240,6 +4240,11 @@ nav .button-collapse i {
   line-height: 56px;
 }
 
+#image-logo {
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
 nav .brand-logo {
   position: absolute;
   color: #fff;
