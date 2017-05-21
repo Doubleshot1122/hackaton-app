@@ -35,13 +35,13 @@ function customizeUser(req, res, next) {
   const id = req.params.id
   const userTags = req.body
   userTags.keywords = {
-    'keywords': userTags.keywords.split(' ')
+    'keywords': userTags.keywords.split(',')
   };
   return db('users')
     .update(userTags)
     .where('users.id', id)
-    .then(() => {
-      res.redirect(`/users/${id}/edit`)
+    .then((result) => {
+      res.status(200).json(result[1]);
     })
     .catch((err) => next(err))
 }
@@ -53,7 +53,7 @@ function getUserForm(req, res, next) {
       .where('users.id', id)
       .then((users) => {
         user = users[0];
-        user.keywords = user.keywords.keywords.join(" ");
+        user.keywords = user.keywords.keywords;
         res.render('profile-edit.hbs', { user })
       }).catch((err) => next(err));
   }
@@ -86,7 +86,7 @@ function showAllArticles(req, res, next) {
         article.userId = userId;
       })
       console.log(articles);
-      res.render('showUserArticles.hbs', { articles })
+      res.render('showUserArticles.hbs', { articles, userId })
     })
     .catch((err) => next(err))
 }
