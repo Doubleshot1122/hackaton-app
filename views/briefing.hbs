@@ -1,24 +1,23 @@
 {{#each briefing}}
-    <div class="row">
-      <div class="col s12 m6 l3">
-        <div class="card large blue-grey">
-          <div class="card-content white-text">
-            <img src="{{this.png}}" class="article-image"></img>
-            <br>
-            <span class="card-title activator">{{ this.title }}</span>
-            <p class="activator">{{ this.preview }}</p>
-            <br>
-            <ul id="navlist" class="center tags-chips">
-              {{#each this.matchedWords}}
-                <span class="chip"><i class="material-icons">{{this}}</i></span>
-              {{/each}}
-            </ul>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title">{{ this.title }}<i class="material-icons right">close</i></span>
-            <p>{{ this.description }}</p>
-            <a href="{{ this.link }}">Read More</a>
+    <div class="container">
+      <div class="briefing-container">
+        <div class="row">
+          <div class="center col s12">
+            <img src="{{this.png}}" class="article-image briefing"></img>
           </div>
         </div>
+        <div class="row">
+          <div class="center col s12">
+            <h4>{{this.title}}</h4>
+          </div>
+          <div class="center col s12">
+            <h6>{{this.preview}}</h6>
+          </div>
+          <div class="left col s12">
+            <p>{{this.description}}</p>
+          </div>
+        </div>
+      </div>
     </div>
+    <hr>
 {{/each}}

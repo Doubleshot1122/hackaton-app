@@ -31,3 +31,11 @@ padding-right: 20px;
   width: 100%;
   height: auto;
 }
+
+.article-image.briefing {
+  width: 25rem;
+}
+
+.briefing-container {
+  padding: 8rem 10rem;
+}
