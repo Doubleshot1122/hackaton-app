@@ -1,6 +1,6 @@
 const db = require('../db')
 
-function showUserProfile(req, res, next){
+function showUserProfile(req, res, next) {
   const id = req.params.id
 
   return db('users')
@@ -11,27 +11,50 @@ function showUserProfile(req, res, next){
     .catch((err) => next(err))
 }
 
-function customizeUser(req, res, next){
+function editUserProfile(req, res, next) {
   const id = req.params.id
-  const userTags = req.body
 
   return db('users')
-    .update(userTags)
     .where('users.id', id)
-    .then(() => {
-      res.redirect(`/users/${id}`)
+    .then((userData) => {
+      res.render('/user/index', userData)
     })
     .catch((err) => next(err))
 }
 
-function getUserForm(req, res, next){
-  return res.render('profile-form');
+function customizeUser(req, res, next) {
+  const id = req.params.id
+  const userTags = req.body
+  userTags.keywords = {
+    'keywords': userTags.keywords.split(' ')
+  };
+  return db('users')
+    .update(userTags)
+    .where('users.id', id)
+    .then(() => {
+      res.redirect(`/users/${id}/edit`)
+    })
+    .catch((err) => next(err))
 }
 
-function newUser(req,res,next){
+function getUserForm(req, res, next) {
+  const id = req.params.id
+  return db('users')
+    .where('users.id', id)
+    .then((users) => {
+      user = users[0];
+      user.keywords = user.keywords.keywords.join(" ");
+      console.log(user);
+      res.render('profile-edit', {
+        user
+      })
+    }).catch((err) => next(err));
+}
+
+function newUser(req, res, next) {
   const newUser = req.body
   newUser.keywords = {
-    'keywords' : newUser.keywords.split(' ')
+    'keywords': newUser.keywords.split(' ')
   };
 
   return db('users')
@@ -43,47 +66,47 @@ function newUser(req,res,next){
 }
 
 //show all articles
-  //restrict articles passed to the rendering function just to the ones that are relevant to that keyword
-function showAllArticles(req, res, next){
+//restrict articles passed to the rendering function just to the ones that are relevant to that keyword
+function showAllArticles(req, res, next) {
   const id = req.params.id
 
-  return Promise.all([queryUsers(id),queryArticles()])
+  return Promise.all([queryUsers(id), queryArticles()])
     .then((userArticleData) => {
-      const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords).sort(sortArticles)
+      const articles = returnRelevantArticles(userArticleData[1], userArticleData[0][0].keywords.keywords).sort(sortArticles)
       console.log(articles);
       res.render('showUserArticles.hbs', {articles: articles, id: id})
     })
     .catch((err) => next(err))
 }
 
-function queryUsers(id){
-  return db('users').where('users.id',id)
+function queryUsers(id) {
+  return db('users').where('users.id', id)
 }
 
-function queryArticles(){
+function queryArticles() {
   return db('articles')
 }
 
 // returns articles that have matching keywords with additional fields for number of matches, and
-function returnRelevantArticles(articleData, keywords){
+function returnRelevantArticles(articleData, keywords) {
   return articleData.filter(article => {
-    if(checkForKeywords(article,keywords)){
-      return countMatches(article,keywords)
+    if (checkForKeywords(article, keywords)) {
+      return countMatches(article, keywords)
     }
   })
 }
 
 // returns a boolean and decides whether or not an article is relevant to the user
-function checkForKeywords(article, userKeys){
+function checkForKeywords(article, userKeys) {
   return article.keywords.keywords.some(keyword => userKeys.includes(keyword))
 }
 
 //could also add a field matched keys to enable fancy display of matches
-function countMatches(article, userKeys){
+function countMatches(article, userKeys) {
   const matches = []
 
-  const numberOfMatches = article.keywords.keywords.filter(keyword =>{
-    if(userKeys.includes(keyword)){
+  const numberOfMatches = article.keywords.keywords.filter(keyword => {
+    if (userKeys.includes(keyword)) {
       matches.push(keyword)
       return keyword
     }
@@ -95,18 +118,17 @@ function countMatches(article, userKeys){
   return article
 }
 
-function sortArticles(a,b){
-  if(a.numMatches < b.numMatches){
+function sortArticles(a, b) {
+  if (a.numMatches < b.numMatches) {
     return 1
-  }
-  else if(a.numMatches > b.numMatches){
+  } else if (a.numMatches > b.numMatches) {
     return -1
   }
   return 0
 }
 
 
-function showSpecificArticle(req, res, next){
+function showSpecificArticle(req, res, next) {
   const userId = req.params.id
   const articleId = req.params.articleId
 }

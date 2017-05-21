@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config()
 const hbs = require('hbs')
+const methodOverride = require('method-override')
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -23,6 +24,7 @@ hbs.registerPartials(path.join(__dirname, '/views/partials'))
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(methodOverride('_method'))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
