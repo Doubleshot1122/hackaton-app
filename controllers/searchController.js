@@ -80,7 +80,6 @@ function parseRSSfeed(url) {
             item = items[i];
             parseRSSitem(item);
         }
-        generateKeywords();
     });
 }
 
