@@ -5,19 +5,7 @@ const striptags = require('striptags');
 function showUserProfile(req, res, next) {
   const id = req.params.id
 
-  return db('users')
-    .where('users.id', id)
-    .then((userData) => {
-      const users = userData[0]
-      users.keywords = users.keywords.keywords
-      return users;
-    })
-    .then((users) => {
-      return db('users').then((allUsers) => {
-        res.render('users', { users, allUsers })
-      })
-    })
-    .catch((err) => next(err))
+  res.redirect(`${id}/article`)
 }
 
 function editUserProfile(req, res, next) {
