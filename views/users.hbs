@@ -4,8 +4,8 @@
       <div class="row">
         {{#each users.keywords}}
         <div class="col s2 m3">
-          <div id={{this}} class="card-panel orange center">
-            <span class="white-text">{{this}}</span>
+          <div data-name="{{this}}" class="keyword card-panel orange center">
+            <span data-name="{{this}}" class="white-text">{{this}}</span>
           </div>
         </div>
         {{/each}}
@@ -14,12 +14,9 @@
   </div>
   <div class="row">
     <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">Search Keywords</label>
-          </div>
+      <form class="col s12 offset-s2">
+        <div class="input-field col s6">
+          <input id="keyword-search" type="text" class="validate">
         </div>
       </form>
     </div>

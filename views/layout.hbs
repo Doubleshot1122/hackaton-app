@@ -9,11 +9,15 @@
   <body>
     <nav class="blue darken-4">
       <div class="nav-wrapper">
-        <a href="/" class="brand-logo right">PROFILE NAME</a>
+        {{#if users}}
+        <a href="/users/{{users.id}}" class="brand-logo right">{{users.name}}</a>
+        {{/if}}
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">Menu</i></a>
         <ul class="left hide-on-med-and-down">
           <li><a href="/users/add-user">Add Profile</a></li>
-          <li><a href="/users/{{user.id}}">Edit Profile</a></li>
+          {{#if users}}
+          <li><a href="/users/{{users.id}}/edit">Edit Profile</a></li>
+          {{/if}}
           <li><a href="#">View Brief</a></li>
           <li><a href="#">Print Brief</a></li>
         </ul>
