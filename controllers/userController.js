@@ -25,8 +25,9 @@ function editUserProfile(req, res, next) {
 
   return db('users')
     .where('users.id', id)
-    .then((userData) => {
-      res.render('/user/index', userData)
+    .then((users) => {
+      console.log(users);
+      res.render('profile-edit', {users})
     })
     .catch((err) => next(err))
 }
@@ -40,8 +41,8 @@ function customizeUser(req, res, next) {
   return db('users')
     .update(userTags)
     .where('users.id', id)
-    .then((result) => {
-      res.status(200).json(result[1]);
+    .then((user) => {
+      res.render('profile-edit.hbs', { user })
     })
     .catch((err) => next(err))
 }
