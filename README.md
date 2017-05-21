@@ -1,3 +1,5 @@
+![logo](public/assets/logo.png)
+
 ## Inspiration
 Create an application that simplifies the process of Curators creating content for the Convey.
 
