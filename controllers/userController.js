@@ -35,13 +35,13 @@ function customizeUser(req, res, next) {
   const id = req.params.id
   const userTags = req.body
   userTags.keywords = {
-    'keywords': userTags.keywords.split(' ')
+    'keywords': userTags.keywords.split(',')
   };
   return db('users')
     .update(userTags)
     .where('users.id', id)
-    .then(() => {
-      res.redirect(`/users/${id}/edit`)
+    .then((result) => {
+      res.status(200).json(result[1]);
     })
     .catch((err) => next(err))
 }
@@ -53,9 +53,10 @@ function getUserForm(req, res, next) {
       .where('users.id', id)
       .then((users) => {
         user = users[0];
-        user.keywords = user.keywords.keywords.join(" ");
+        user.keywords = user.keywords.keywords;
         res.render('profile-edit.hbs', { user })
-      }).catch((err) => next(err));
+      })
+      .catch((err) => next(err));
   }
   res.render('profile-form')
 }
@@ -86,7 +87,7 @@ function showAllArticles(req, res, next) {
         article.userId = userId;
       })
       console.log(articles);
-      res.render('showUserArticles.hbs', { articles })
+      res.render('showUserArticles.hbs', { articles, userId })
     })
     .catch((err) => next(err))
 }
@@ -144,14 +145,13 @@ function sortArticles(a, b) {
 function showUserBreifing(req, res, next) {
   const userid = req.params.id;
 
-  db('articles')
-  .innerJoin('user_article', 'articles.id', 'user_article.article_id')
-  .where('user_article.user_id', `${userid}`)
-  .then(breifingArticles => {
-    res.render('briefing', { breifingArticles })
-  })
-
-
+  return db('articles')
+    .innerJoin('user_article', 'articles.id', 'user_article.article_id')
+    .where('user_article.user_id', `${userid}`)
+    .then(briefing => {
+      res.render('briefing', { briefing })
+    })
+    .catch((err) => next(err))
 }
 
 //add new briefing to the list of user briefings
@@ -160,11 +160,24 @@ function addUserBreifing(req, res, next) {
   const article_id = req.body.article_id;
   const newBreifing = { user_id, article_id };
 
-  db('user_article').insert(newBreifing, '*')
-  .then(results => {
-    res.send(results)
-  })
+  return db('user_article').insert(newBreifing, '*')
+    .then(results => {
+      res.send(results)
+    })
+    .catch((err) => next(err))
+}
+
+function removeUserBreifing(req, res, next){
+  const id = req.params.id
+  const article_id = req.params.article_id
+  console.log(id, article_id)
+
   return db('user_article')
+    .del().where({user_id: id, article_id: article_id})
+    .then((results) => {
+      res.json(results)
+    })
+    .catch((err) => next(err))
 }
 
 module.exports = {
@@ -174,5 +187,6 @@ module.exports = {
   showAllArticles,
   getUserForm,
   showUserBreifing,
-  addUserBreifing
+  addUserBreifing,
+  removeUserBreifing
 }

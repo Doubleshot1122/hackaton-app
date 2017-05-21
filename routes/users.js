@@ -19,5 +19,7 @@ router.get('/:id/article', userController.showAllArticles)
 //briefing page
 router.get('/:id/briefing', userController.showUserBreifing)
 router.post('/:id/briefing', userController.addUserBreifing)
+router.delete('/:id/briefing/:article_id', userController.removeUserBreifing)
+
 
 module.exports = router

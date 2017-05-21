@@ -20,7 +20,7 @@
           {{#each allUsers}}
           <li class="collection-item avatar">
             <a href="/users/{{this.id}}" >
-              <img src="../assets/{{this.image_url}}" width="25" alt="" class="circle">
+              <img src="../{{this.image_url}}" width="25" alt="" class="circle">
               {{this.name}}
             </a>
           </li>
@@ -29,7 +29,12 @@
         <ul class="left hide-on-med-and-down">
           <li><a href="/users/add-user">Add Profile</a></li>
           {{#if users}}
-          <li><a href="/users/{{users.id}}/edit">Edit Profile</a></li>
+            <li><a href="/users/{{users.id}}/edit">Edit Profile</a></li>
+            <li><a href="/users/{{users.id}}/briefing">View Brief</a></li>
+            <li><a href="#">Print Brief</a></li>
+          {{/if}}
+          {{#if userId}}
+          <li><a href="/users/{{userId}}/edit">Edit Profile</a></li>
           {{/if}}
           <li><a href="#">View Brief</a></li>
           <li><a href="#">Print Brief</a></li>
