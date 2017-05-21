@@ -1,6 +1,7 @@
 const db = require('../db');
 const striptags = require('striptags');
 
+
 function showUserProfile(req, res, next) {
   const id = req.params.id
 
@@ -9,7 +10,12 @@ function showUserProfile(req, res, next) {
     .then((userData) => {
       const users = userData[0]
       users.keywords = users.keywords.keywords
-      res.render('users', {users})
+      return users;
+    })
+    .then((users) => {
+      return db('users').then((allUsers) => {
+        res.render('users', { users, allUsers })
+      })
     })
     .catch((err) => next(err))
 }

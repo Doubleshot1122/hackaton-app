@@ -3,6 +3,7 @@
   <head>
     <title>{{title}}</title>
     <link rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
@@ -15,6 +16,16 @@
         <a href="/" class="brand-logo right">HOME</a>
         {{/if}}
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">Menu</i></a>
+        <ul id="dropdown1" class="dropdown-content">
+          {{#each allUsers}}
+          <li class="collection-item avatar">
+            <a href="/users/{{this.id}}" >
+              <img src="../assets/{{this.image_url}}" width="25" alt="" class="circle">
+              {{this.name}}
+            </a>
+          </li>
+          {{/each}}
+        </ul>
         <ul class="left hide-on-med-and-down">
           <li><a href="/users/add-user">Add Profile</a></li>
           {{#if users}}
@@ -22,6 +33,9 @@
           {{/if}}
           <li><a href="#">View Brief</a></li>
           <li><a href="#">Print Brief</a></li>
+          {{#if allUsers}}
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Choose Profile<i class="material-icons right">arrow_drop_down</i></a></li>
+          {{/if}}
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li><a href="#">Add Profile</a></li>
