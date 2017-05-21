@@ -42,7 +42,8 @@ def main():
         'http://feeds.bbci.co.uk/news/scotland/rss.xml',
         'http://feeds.bbci.co.uk/news/wales/rss.xmlhttp://feeds.bbci.co.uk/news/wales/rss.xml',
     ]
-    rss = RSS(urls)
+    dsn = "host='localhost' dbname='hacknet_db' user='postgres' password='postgres'"
+    rss = RSS(urls, dsn)
     rss.parse()
 
 if __name__  == "__main__":

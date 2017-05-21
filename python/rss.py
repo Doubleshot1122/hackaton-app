@@ -3,12 +3,18 @@ import feedparser
 import requests
 import re
 import sys
+import psycopg2
+import json
 from bs4 import BeautifulSoup
 
 class RSS(object):
 
-    def __init__(self, arry):
+    def __init__(self, arry, dsn):
         self.arry = arry
+        self.conn = psycopg2.connect(dsn)
+
+    def closeDB(self):
+        self.conn.close()
 
     def parse(self): 
         for url in self.arry:
@@ -20,8 +26,9 @@ class RSS(object):
             elif 'entries' in feed:
                 for item in items['summary_detail']:
                     self.format(item)
+        self.closeDB()
 
-    def format(self, item, type="usa"):
+    def format(self, item):
         rss = {}
         rss['title'] = item['title']
         rss['description'] = item['description']
@@ -46,7 +53,6 @@ class RSS(object):
             tmp += [ meta.attrs['content'] for meta in metas if 'name' in meta.attrs and meta.attrs['name'] == 'keywords' ]
             tmp += [ meta.attrs['content'] for meta in metas if 'name' in meta.attrs and meta.attrs['name'] == 'author' ]
             png = [ meta.attrs['content'] for meta in metas if 'property' in meta.attrs and meta.attrs['property'] == 'og:image' ]
-            print metas
             if len(png) > 0:
                 rss['png'] = png[0]
             elif len(item['media_content']) > 0:
@@ -62,4 +68,12 @@ class RSS(object):
                         if subWord != "" and len(subWord) > 3:
                             rss['keywords'].append(subWord)
             if len(rss['keywords']) != 0:
-                print rss        
+                self.insertDB(rss)
+
+    def insertDB(self, rss):
+        sql = """INSERT INTO articles(link, png, title, keywords, description) VALUES(%s, %s, %s, %s, %s);"""
+        cur = self.conn.cursor()
+        print rss
+        cur.execute(sql, (rss['link'], rss['png'], rss['title'],json.dumps(rss['keywords']), rss['description']))
+        self.conn.commit()
+        cur.close()
