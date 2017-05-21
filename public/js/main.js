@@ -24,4 +24,11 @@ const addToQuery = () => {
   }
 }
 
+const addToBriefing = () => {
+  const $article = $(event.target);
+  console.log($article.data('id'));
+  console.log($article.data('userid'));
+}
+
 $('.col .keyword.card-panel').on('click', addToQuery);
+$('.add-to-briefing').on('click', addToBriefing);
