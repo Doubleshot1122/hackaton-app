@@ -77,13 +77,16 @@ function newUser(req, res, next) {
 //show all articles
 //restrict articles passed to the rendering function just to the ones that are relevant to that keyword
 function showAllArticles(req, res, next) {
-  const id = req.params.id
+  const userId = req.params.id
 
-  return Promise.all([queryUsers(id), queryArticles()])
+  return Promise.all([queryUsers(userId), queryArticles()])
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1], userArticleData[0][0].keywords.keywords).sort(sortArticles)
-      console.log(articles)
-      res.render('showUserArticles.hbs', {articles: articles, id: id})
+      articles.forEach(article => {
+        article.userId = userId;
+      })
+      console.log(articles);
+      res.render('showUserArticles.hbs', { articles })
     })
     .catch((err) => next(err))
 }
@@ -138,7 +141,7 @@ function sortArticles(a, b) {
 }
 
 function showUserBreifing(req, res, next) {
-  return 
+  res.render('briefing')
 }
 
 function addUserBreifing(req, res, next) {

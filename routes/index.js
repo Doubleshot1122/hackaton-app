@@ -6,5 +6,4 @@ const indexController = require('../controllers/indexController.js')
 
 router.get('/', indexController.getAllUsersDropDown)
 
-
 module.exports = router;
