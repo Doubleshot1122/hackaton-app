@@ -33,7 +33,7 @@ function newUser(req,res,next){
   newUser.keywords = {
     'keywords' : newUser.keywords.split(' ')
   };
-  
+
   return db('users')
     .insert(newUser, '*')
     .then((newUser) => {
@@ -51,7 +51,7 @@ function showAllArticles(req, res, next){
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1],userArticleData[0][0].keywords.keywords).sort(sortArticles)
       console.log(articles);
-      res.render('/article/index', {articles})
+      res.render('showUserArticles.hbs', {articles: articles, id: id})
     })
     .catch((err) => next(err))
 }
