@@ -66,3 +66,28 @@ function addArticle($, $article, $articleId, $userId){
 
 $('.col .keyword.card-panel').on('click', addToQuery);
 $('.add-to-briefing').on('click', addToBriefing);
+
+const updateUserProfile = (e) => {
+  e.preventDefault();
+
+  let $keywords = $('#keyword-list').data('keywords');
+  $keywords += (',' + $('#keywords').val());
+  let userId = $('#profile_name').data('id');
+  let name = $('#profile_name').val();
+  let image_url = $('#image_url').val();
+  let region = $('#region').val();
+  let keywords = $keywords;
+
+  $.ajax({
+    method: 'PUT',
+    url: `/users/${userId}`,
+    data: { name, image_url, region, keywords }
+  })
+  .done(() => {
+    window.location.replace(`/users/${userId}/edit`)
+  })
+  .catch(err => {
+    console.error(err);
+  })
+}
+$('#profile-form-submit').on('click', updateUserProfile)
