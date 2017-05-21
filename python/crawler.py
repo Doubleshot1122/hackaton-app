@@ -3,7 +3,7 @@ from rss import RSS
 
 def main():
     urls = [
-        """'http://rss.cnn.com/rss/cnn_topstories.rss',
+        'http://rss.cnn.com/rss/cnn_topstories.rss',
         'http://rss.cnn.com/rss/cnn_world.rss',
         'http://rss.cnn.com/rss/cnn_us.rss',
         'http://rss.cnn.com/rss/money_latest.rss',
@@ -13,7 +13,7 @@ def main():
         'http://rss.cnn.com/rss/cnn_showbiz.rss',
         'http://rss.cnn.com/rss/cnn_travel.rss',
         'http://rss.cnn.com/rss/cnn_living.rss',
-        'http://rss.cnn.com/rss/cnn_freevideo.rss',"""
+        'http://rss.cnn.com/rss/cnn_freevideo.rss',
         'http://feeds.reuters.com/news/artsculture',
         'http://feeds.reuters.com/reuters/businessNews',
         'http://feeds.reuters.com/reuters/companyNews',
@@ -32,12 +32,6 @@ def main():
         'http://feeds.reuters.com/reuters/topNews',
         'http://feeds.reuters.com/Reuters/domesticNews',
         'http://feeds.reuters.com/Reuters/worldNews',
-        'http://feeds.foxnews.com/foxnews/latest',
-        'http://feeds.foxnews.com/foxnews/politics',
-        'http://feeds.foxnews.com/foxnews/science',
-        'http://feeds.foxnews.com/foxnews/world',
-        'http://feeds.foxnews.com/foxnews/internal/travel/mixed',
-        'http://feeds.foxnews.com/foxnews/national',
         'http://feeds.bbci.co.uk/news/world/africa/rss.xml',
         'http://feeds.bbci.co.uk/news/world/asia/rss.xml',
         'http://feeds.bbci.co.uk/news/world/europe/rss.xml',

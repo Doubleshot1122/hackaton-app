@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec788b89-630c-4b8a-99a0-49daa4175dc5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/populate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/searchController.js" afterPath="$PROJECT_DIR$/controllers/searchController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/search.js" afterPath="$PROJECT_DIR$/routes/search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/crawler.py" afterPath="$PROJECT_DIR$/python/crawler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/rss.py" afterPath="$PROJECT_DIR$/python/rss.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,9 +49,12 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="580">
+              <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+              <folding>
+                <marker date="1495356171139" expanded="true" signature="1160:1232" ph="{...}" />
+                <marker date="1495356171139" expanded="true" signature="1291:1537" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,17 +64,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="articleController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/articleController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1495356171139" expanded="true" signature="91:237" ph="{...}" />
+                <marker date="1495356171139" expanded="true" signature="256:281" ph="{&quot;getAllUsersDropDown&quot;: getAllUsersDropDown...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -757,12 +751,12 @@
       <workItem from="1495315318399" duration="8097000" />
       <workItem from="1495324969629" duration="600000" />
       <workItem from="1495327193405" duration="10130000" />
-      <workItem from="1495348844132" duration="4409000" />
+      <workItem from="1495348844132" duration="6000000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26003000" />
+    <option name="totallyTimeSpent" value="27594000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1602" height="832" extended-state="6" />
@@ -886,7 +880,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1495356171139" expanded="true" signature="1160:1232" ph="{...}" />
+            <marker date="1495356171139" expanded="true" signature="1291:1537" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -974,7 +971,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1495356171139" expanded="true" signature="1160:1232" ph="{...}" />
+            <marker date="1495356171139" expanded="true" signature="1291:1537" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1180,7 +1180,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1495356171139" expanded="true" signature="91:237" ph="{...}" />
+            <marker date="1495356171139" expanded="true" signature="256:281" ph="{&quot;getAllUsersDropDown&quot;: getAllUsersDropDown...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1194,9 +1197,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="580">
+          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding>
+            <marker date="1495356171139" expanded="true" signature="1160:1232" ph="{...}" />
+            <marker date="1495356171139" expanded="true" signature="1291:1537" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
