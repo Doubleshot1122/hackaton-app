@@ -1,0 +1,26 @@
+{{#each articles}}
+    <div class="row">
+      <div class="col s12 m6 l3">
+        <div class="card large blue-grey">
+          <div class="card-content white-text">
+            <span class="card-title activator">{{ this.title }}</span>
+            <p class="activator">{{ this.preview }}</p>
+            <br>
+            <img src="{{this.png}}"></img>
+            <ul id="navlist">
+              <!-- transform into "pull button" format, maybe with a % determined border-radius-->
+              {{#each this.matchedWords}}
+                <!-- <li class="tags capsule">{{ this }}</li> -->
+                <span class="chip"><i class="material-icons">{{this}}</i></span>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title">{{ this.title }}<i class="material-icons right">close</i></span>
+            <p>{{ this.description }}</p>
+          </div>
+        </div>
+    <a href="/users/{{id}}/articles/{{this.id}}" class="waves-effect waves-light btn"><i class="material-icons left"></i>read</a>
+    <a class="waves-effect waves-light btn"><i class="material-icons right"></i>Add</a>
+    </div>
+{{/each}}
