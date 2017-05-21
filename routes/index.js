@@ -6,7 +6,7 @@ const indexController = require('../controllers/indexController.js')
 
 router.get('/', indexController.getAllUsersDropDown)
 
-router.get('/', articleCard);
+// router.get('/', articleCard);
 
 function articleCard (req, res, next) {
   const article = {
