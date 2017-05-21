@@ -41,8 +41,8 @@ function customizeUser(req, res, next) {
   return db('users')
     .update(userTags)
     .where('users.id', id)
-    .then((result) => {
-      res.status(200).json(result[1]);
+    .then((user) => {
+      res.render('profile-edit.hbs', { user })
     })
     .catch((err) => next(err))
 }
