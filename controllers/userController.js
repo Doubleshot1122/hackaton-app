@@ -145,7 +145,7 @@ function showUserBreifing(req, res, next) {
 }
 
 function addUserBreifing(req, res, next) {
-
+  return db('user_article')
 }
 
 module.exports = {
