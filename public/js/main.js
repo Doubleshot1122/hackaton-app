@@ -26,8 +26,24 @@ const addToQuery = () => {
 
 const addToBriefing = () => {
   const $article = $(event.target);
-  console.log($article.data('id'));
-  console.log($article.data('userid'));
+
+  const $articleId = $article.data('id')
+  const $userId = $article.data('userid')
+
+  if ($article.hasClass('red')){
+    $article.removeClass('red').text('Add');
+  } else {
+    $.ajax({
+      method: 'POST',
+      url: `/users/${$userId}/briefing`,
+      data: { user_id: $userId, article_id: $articleId },
+    })
+    .done(() => {
+      console.log('added!');
+    })
+    $article.addClass('red').text('Remove');
+  }
+
 }
 
 $('.col .keyword.card-panel').on('click', addToQuery);

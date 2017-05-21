@@ -18,6 +18,6 @@ router.get('/:id/article', userController.showAllArticles)
 
 //briefing page
 router.get('/:id/briefing', userController.showUserBreifing)
-router.post('/:id/briefing/new', userController.addUserBreifing)
+router.post('/:id/briefing', userController.addUserBreifing)
 
 module.exports = router
