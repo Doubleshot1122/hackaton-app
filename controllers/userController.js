@@ -44,8 +44,7 @@ function getUserForm(req, res, next) {
     .then((users) => {
       user = users[0];
       user.keywords = user.keywords.keywords.join(" ");
-      console.log(user);
-      res.render('profile-edit', {
+      res.render('profile-edit.hbs', {
         user
       })
     }).catch((err) => next(err));
@@ -98,14 +97,14 @@ function returnRelevantArticles(articleData, keywords) {
 
 // returns a boolean and decides whether or not an article is relevant to the user
 function checkForKeywords(article, userKeys) {
-  return article.keywords.keywords.some(keyword => userKeys.includes(keyword))
+  return article.keywords.some(keyword => userKeys.includes(keyword))
 }
 
 //could also add a field matched keys to enable fancy display of matches
 function countMatches(article, userKeys) {
   const matches = []
 
-  const numberOfMatches = article.keywords.keywords.filter(keyword => {
+  const numberOfMatches = article.keywords.filter(keyword => {
     if (userKeys.includes(keyword)) {
       matches.push(keyword)
       return keyword
