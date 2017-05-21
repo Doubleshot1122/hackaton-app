@@ -25,6 +25,8 @@ router.get('/', function(req, res, next) {
         search.parseRSSfeed(url);
     });
 
+    search.generateKeywords();
+
     res.send('populating database');
 
 });
