@@ -114,8 +114,8 @@ function countMatches(article, userKeys) {
     }
   }).length
 
-  article.numMatches = numberOfMatches
-  article.matchedWords = matches
+  article.numMatches = numberOfMatches;
+  article.matchedWords = Array.from(new Set(matches));
   article.description = striptags(article.description)
 
   return article
