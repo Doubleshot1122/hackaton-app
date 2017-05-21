@@ -148,7 +148,6 @@ function showUserBreifing(req, res, next) {
   .innerJoin('user_article', 'articles.id', 'user_article.article_id')
   .where('user_article.user_id', `${userid}`)
   .then(breifingArticles => {
-    console.log(breifingArticles.length);
     res.render('briefing', { breifingArticles })
   })
 
