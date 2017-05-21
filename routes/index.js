@@ -23,5 +23,4 @@ function articleCard (req, res, next) {
   res.render('index', { article });
 }
 
-
 module.exports = router;
