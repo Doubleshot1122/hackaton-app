@@ -10,8 +10,8 @@ router.post('/', userController.newUser)
 
 //user profile
 router.get('/:id', userController.showUserProfile)
+router.get('/:id/edit', userController.getUserForm)
 router.put('/:id', userController.customizeUser)
-
 
 //user index page
 router.get('/:id/article', userController.showAllArticles)

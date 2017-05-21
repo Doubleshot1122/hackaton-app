@@ -11,6 +11,17 @@ function showUserProfile(req, res, next){
     .catch((err) => next(err))
 }
 
+function editUserProfile(req, res, next){
+    const id = req.params.id
+
+    return db('users')
+            .where('users.id', id)
+            .then((userData) => {
+            res.render('/user/index', userData)
+})
+.catch((err) => next(err))
+}
+
 function customizeUser(req, res, next){
   const id = req.params.id
   const userTags = req.body
@@ -25,7 +36,15 @@ function customizeUser(req, res, next){
 }
 
 function getUserForm(req, res, next){
-  return res.render('profile-form');
+    const id = req.params.id
+    return db('users')
+            .where('users.id', id)
+            .then((users) => {
+              user = users[0];
+              user.keywords = user.keywords.keywords.join(" ");
+              console.log(user);
+              res.render('profile-edit', {user})
+            }).catch((err) => next(err));
 }
 
 function newUser(req,res,next){

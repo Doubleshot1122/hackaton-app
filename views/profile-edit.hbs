@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col s10 offset-s1 l8 offset-l2">
+        <h3>Edit User Profile</h3>
+    </div>
+    <div class="col s12 l8 offset-l2">
+        <div class="card blue-grey lighten-5">
+            <div class="card-content white-text">
+                <div class="row ">
+                    <form class="col s12" action="/users/{{user.id}}/edit" method="POST">
+                        <div class="input-field col s6">
+                            <input id="profile_name" type="text" class="validate" name="name" value="{{user.name}}">
+                            <label for="profile_name">Profile Name</label>
+                        </div>
+                        <div class="file-field input-field col s4">
+                            <div class="btn blue">
+                                <span>Image</span>
+                                <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" name="image_url" value="{{user.image_url}}">
+                            </div>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="region" type="text" class="validate" name="region" value="{{user.region}}">
+                            <label for="region">Region</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="keywords" type="text" class="validate" name="keywords" value="{{user.keywords}}">
+                            <label for="keywords">Keywords</label>
+                        </div>
+                        <div class="col s3 offset-s4 center">
+                            <button id="profile-form-submit" class="btn waves-effect waves-light blue" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
