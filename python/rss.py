@@ -39,8 +39,10 @@ class RSS(object):
                     for sentence in tmp:
                         words = sentence.split(" ")
                         for word in words:
-                            word = re.sub(r'\W+', '', word).lower().strip()
-                            if word != "" and len(word) > 3:
-                                rss['keywords'].append(word)
+                            subString = word.split(",")
+                            for subWord in subString:
+                                subWord = re.sub(r'\W+', '', subWord).lower().strip()
+                                if subWord != "" and len(subWord) > 3:
+                                    rss['keywords'].append(subWord)
                     if len(rss['keywords']) != 0:
                         print rss
