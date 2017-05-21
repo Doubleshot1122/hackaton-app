@@ -33,7 +33,7 @@ function newUser(req,res,next){
   newUser.keywords = {
     'keywords' : newUser.keywords.split(' ')
   };
-  
+
   return db('users')
     .insert(newUser, '*')
     .then((newUser) => {
@@ -107,8 +107,17 @@ function sortArticles(a,b){
 
 
 function showSpecificArticle(req, res, next){
-  const userId = req.params.id
-  const articleId = req.params.articleId
+  const userId = req.params.id;
+  const articleId = req.params.articleId;
+  const article =  db('articles').where('id', articleId)
+  const user = db('users').where('id', userId)
+
+  return Promise.all([article, user])
+    .then(results => {
+      console.log(results);
+      res.render(`/${userId}/article/${articleId}`, results)
+    })
+    .catch((err) => next(err))
 }
 
 
