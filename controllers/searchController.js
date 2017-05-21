@@ -4,6 +4,33 @@ var db = require('../db');
 
 var rssItems = [];
 
+function cleanString(id) {
+    id = id.toUpperCase();
+    id = id.replace( /\t/ , "");
+    id = id.replace( /\n/ , "");
+    id = id.replace( /\r/ , "");
+    id = id.replace( /\b/ , "");
+    id = id.replace( /\f/ , "");
+    return id.replace( /[^a-zA-Z0-9]/ , "").toLocaleLowerCase();
+}
+
+function generateKeywords() {
+
+    return db('articles').select('keywords')
+            .then((response) => {
+                for(var i=0; i < response.length; i++) {
+                    items = response[i].keywords;
+                    for(var j=0; j < items.length; j++) {
+                        item = cleanString(items[j]);
+                        db('keywords').insert({"keyword":item}).catch(function(err) {
+                            //console.log(err.stack);
+                        });
+                    }
+                }
+            }
+    );
+}
+
 function parseRSSitem(value) {
     var url = value.url;
     var client = new MetaInspector(url, { timeout: 5000 });
@@ -21,7 +48,7 @@ function parseRSSitem(value) {
             text = keys[i];
             token = text.split(" ");
             for (var j = 0; j < token.length; j++) {
-                word = token[j];
+                word = cleanString(token[j]);
                 if (r["keywords"].indexOf(word) < 0 && word.length > 3) {
                     r["keywords"].push(word);
                 }
@@ -53,9 +80,11 @@ function parseRSSfeed(url) {
             item = items[i];
             parseRSSitem(item);
         }
+        generateKeywords();
     });
 }
 
 module.exports = {
     parseRSSfeed,
+    generateKeywords
 }

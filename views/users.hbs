@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <div class="row">
+        {{#each users.keywords}}
+        <div class="col s2 m3">
+          <div data-name="{{this}}" class="keyword card-panel orange center">
+            <span data-name="{{this}}" class="white-text">{{this}}</span>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="row">
+      <form class="col s12 offset-s2">
+        <div class="input-field col s6">
+          <input id="keyword-search" type="text" class="validate">
+        </div>
+      </form>
+    </div>
+    <div class="col s3 offset-s4 center">
+      <button id="article-search-submit" class="btn waves-effect waves-light blue" type="submit">Search</button>
+    </div>
+  </div>
+</div>
