@@ -138,11 +138,18 @@ function sortArticles(a, b) {
 }
 
 function showUserBreifing(req, res, next) {
-
+  return 
 }
 
 function addUserBreifing(req, res, next) {
+  const user_id = req.body.user_id;
+  const article_id = req.body.article_id;
+  const newBreifing = { user_id, article_id };
 
+  db('user_article').insert(newBreifing, '*')
+  .then(results => {
+    res.send(results)
+  })
 }
 
 module.exports = {
