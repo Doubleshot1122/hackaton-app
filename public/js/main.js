@@ -31,7 +31,7 @@ const addToBriefing = () => {
   const $userId = $article.data('userid')
 
   if ($article.hasClass('red')){
-    return removeArticle($, $userId, $articleId)
+    return removeArticle($, $article, $userId, $articleId)
   }
   else {
     return addArticle($, $article, $articleId, $userId)
