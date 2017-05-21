@@ -73,7 +73,6 @@ function showAllArticles(req, res, next) {
   return Promise.all([queryUsers(id), queryArticles()])
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1], userArticleData[0][0].keywords.keywords).sort(sortArticles)
-      console.log(articles);
       res.render('showUserArticles.hbs', {articles: articles, id: id})
     })
     .catch((err) => next(err))
@@ -131,13 +130,13 @@ function sortArticles(a, b) {
 function showSpecificArticle(req, res, next){
   const userId = req.params.id;
   const articleId = req.params.articleId;
-  const article =  db('articles').where('id', articleId)
-  const user = db('users').where('id', userId)
+  const article =  db('articles').where('id', articleId).first();
+  const user = db('users').where('id', userId).first();
 
   return Promise.all([article, user])
     .then(results => {
-      console.log(results);
-      res.render(`/${userId}/article/${articleId}`, results)
+      console.log(results[0].description);
+      res.render(`singleArticle`, {article: results[0], user: results[1]})
     })
     .catch((err) => next(err))
 }
