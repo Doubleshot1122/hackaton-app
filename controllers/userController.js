@@ -131,31 +131,10 @@ function sortArticles(a, b) {
   return 0
 }
 
-
-function showSpecificArticle(req, res, next){
-  const userId = req.params.id;
-  const articleId = req.params.articleId;
-  const article =  db('articles').where('id', articleId).first();
-  const user = db('users').where('id', userId).first();
-
-  return Promise.all([article, user])
-    .then(results => {
-      console.log('=========');
-      console.log(results[0]);
-      console.log('---------');
-      console.log(striptags(results[0].description));
-      console.log('=========');
-      res.render(`singleArticle`, {article: results[0], user: results[1]})
-    })
-    .catch((err) => next(err))
-}
-
-
 module.exports = {
   showUserProfile,
   customizeUser,
   newUser,
   showAllArticles,
-  showSpecificArticle,
   getUserForm
 }
