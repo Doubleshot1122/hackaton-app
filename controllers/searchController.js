@@ -33,7 +33,7 @@ function generateKeywords() {
 
 function parseRSSitem(value) {
     var url = value.url;
-    var client = new MetaInspector(url, { timeout: 5000 });
+    var client = new MetaInspector(url, { timeout: 900 });
     var r = {};
     r["title"] = value.title;
     r["description"] = value.description;
@@ -42,6 +42,7 @@ function parseRSSitem(value) {
 
     client.on("fetch", function(){
         keys = client.keywords;
+        keys += " " + client.description;
 
         // parse each keyword as a word if it turns out to be a sentence
         for (var i = 0; i < keys.length; i++) {
@@ -63,6 +64,7 @@ function parseRSSitem(value) {
             return db('articles').select('id').where('link',url)
                 .then((response) => {
                     if(response.length === 0){
+                        console.log(r);
                         return db('articles').insert(r);
                     }
                 }
