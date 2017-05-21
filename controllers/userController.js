@@ -76,9 +76,7 @@ function showAllArticles(req, res, next) {
   return Promise.all([queryUsers(id), queryArticles()])
     .then((userArticleData) => {
       const articles = returnRelevantArticles(userArticleData[1], userArticleData[0][0].keywords.keywords).sort(sortArticles)
-      console.log("===========");
-      console.log(articles);
-      console.log("===========");
+      console.log(articles)
       res.render('showUserArticles.hbs', {articles: articles, id: id})
     })
     .catch((err) => next(err))
@@ -119,6 +117,7 @@ function countMatches(article, userKeys) {
 
   article.numMatches = numberOfMatches
   article.matchedWords = matches
+  article.description = striptags(article.description)
 
   return article
 }
