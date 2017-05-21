@@ -3,9 +3,12 @@ const router = express.Router();
 const indexController = require('../controllers/indexController.js')
 
 /* GET home page. */
+<<<<<<< HEAD
 
 router.get('/', indexController.getAllUsersDropDown)
 
+=======
+>>>>>>> 1fd48e1a31de98b718b4a81896692c4c6dac445e
 router.get('/', articleCard);
 
 function articleCard (req, res, next) {
@@ -22,6 +25,9 @@ function articleCard (req, res, next) {
 
   res.render('index', { article });
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1fd48e1a31de98b718b4a81896692c4c6dac445e
 
 module.exports = router;
